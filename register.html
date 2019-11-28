@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<style>
+			body {
+			  background:#333;
+			}
+			.form_bg {
+			  background-color:#eee;
+			  color:#666;
+			  padding:20px;
+			  border-radius:10px;
+			  position: absolute;
+			  border:1px solid #fff;
+			  margin: auto;
+			  top: 0;
+			  right: 0;
+			  bottom: 0;
+			  left: 0;
+			  width: 320px;
+			  height: 500px;
+			}
+			.align-center {
+				text-align:center;
+			}
+		</style>
+		<title>Maxis New Registration</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.23/angular-ui-router.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<script src="app.js"></script>
+		<script src="registerController.js"></script>
+   </head>
+   <body ng-app="maxisApp" ng-controller="registerController">
+		<div class="container">
+			<div class="row">
+				<div class="form_bg">
+					<form name="registrationForm">
+						<h2 class="text-center">New Registration</h2>
+						<div class="align-center" ng-if="hasError">
+							<li style="color:red">{{errorMessage}}</li>
+							<br/>
+						</div>
+						<div class="align-center" ng-if="hasListError">
+							<li style="color:red" ng-repeat="error in errors">{{error}}</li>
+							<br/>
+						</div>
+						<div class="align-center" ng-if="isSuccess">
+							<li style="color:green">{{successMessage}}</li>
+							<br/>
+						</div>
+						<br/>
+						<div class="form-group">
+							<input type="text" class="form-control" name="fullName" ng-model="register.fullName" placeholder="Full name">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="userName" ng-model="register.userName" placeholder="Username" required>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="password" ng-model="register.password" placeholder="password" required>
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control" name="email" ng-model="register.email" placeholder="Email" required>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="contactNumber" ng-model="register.contactNumber" placeholder="Contact Number" required>
+						</div>
+						<br/>
+						<div class="align-center">
+							<button type="submit" class="btn btn-default" id="login" ng-click="registration(registrationForm.$valid)">Register</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+    </body>
+</html>

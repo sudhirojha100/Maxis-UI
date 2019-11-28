@@ -1,0 +1,36 @@
+<div style="padding-left:130px;padding-right:200px;" ng-controller="adminController">
+	<div class="se-pre-con" ng-if="loader"></div>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">User Name</th>
+				<th scope="col">Name</th>
+				<th scope="col">Email</th>
+				<th scope="col">Contact Number</th>
+				<th scope="col">Role</th>
+				<th scope="col">Joining Date</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in users">
+				<th scope="row">{{user.userId}}</th>
+				<td>{{user.userName}}</td>
+				<td>{{user.fullName}}</td>
+				<td>{{user.email}}</td>
+				<td>{{user.contactNumber}}</td>
+				<td>{{user.roleName}}</td>
+				<td>{{user.creationDate | date:'dd:MM:yyyy HH:mm:ss a'}}</td>
+				<td>
+					<a>
+						<span style="color:red;" class="glyphicon glyphicon-remove" title="Delete"></span>
+					</a>
+					<a>
+					  <span class="glyphicon glyphicon-eye-open" title="View"></span>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

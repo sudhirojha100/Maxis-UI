@@ -1,0 +1,1 @@
+var maxisApp = angular.module('maxisApp',["ui.router"]);

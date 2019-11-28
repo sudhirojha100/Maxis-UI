@@ -1,0 +1,117 @@
+<div style="padding-left:130px;padding-right:200px;" ng-controller="cartController">
+	<div class="se-pre-con" ng-if="loader"></div>
+	<div class="panel panel-primary">
+		<div class="panel-heading">Shopping Cart
+			<div style="float: right !important;margin-top: -7px;" ng-if="cartSummary">
+				<button type="button" class="btn btn-danger" ng-click="clearCart()">
+					<span class="glyphicon glyphicon-remove"></span> Clear Cart
+				</button>
+			</div>
+		</div>
+			<div class="panel-body">
+				<div class="col-sm-12 col-md-10 col-md-offset-1">
+					<table class="table table-hover" ng-if="cartSummary">
+						<thead>
+							<tr>
+							   <th>Product</th>
+							   <th>Quantity</th>
+							   <th class="text-center">Price</th>
+							   <th class="text-center">Total</th>
+							   <th> </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in cartSummary.cartItems">
+								<td class="col-sm-8 col-md-6">
+									<div class="media">
+										<a class="thumbnail pull-left"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
+										<div class="media-body" style="text-align: center">
+											<h4 class="media-heading"><a>{{item.productName}}</a></h4>
+											<h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
+											<h5 class="media-heading">{{item.description}}</h5>
+										</div>
+									</div>
+								</td>
+								<td class="col-sm-1 col-md-1" style="text-align: center">
+									<input type="text" class="form-control" id="quantity" value="{{item.quantity}}">
+								</td>
+								<td class="col-sm-1 col-md-1 text-center"><strong>{{item.price | number: 2}}</strong></td>
+								<td class="col-sm-1 col-md-1 text-center"><strong>{{item.price * item.quantity | number: 2}}</strong></td>
+								<td class="col-sm-1 col-md-1">
+									<button type="button" class="btn btn-danger" ng-click="remove(item.productId)">
+										<span class="glyphicon glyphicon-remove"></span> Remove
+									</button>
+								</td>
+							</tr>
+            
+							<tr>
+								<td>   </td>
+								<td>   </td>
+								<td>   </td>
+								<td>
+									<h5>Subtotal</h5>
+								</td>
+								<td class="text-right">
+									<h5><strong>{{cartSummary.total | number: 2}}</strong></h5>
+								</td>
+							</tr>
+							<tr>
+								<td>   </td>
+								<td>   </td>
+								<td>   </td>
+								<td>
+									<h5>Estimated shipping</h5>
+								</td>
+								<td class="text-right">
+									<h5><strong>{{cartSummary.shippingChares | number: 2}}</strong></h5>
+								</td>
+							</tr>
+							<tr>
+								<td>   </td>
+								<td>   </td>
+								<td>   </td>
+								<td>
+									<h5>Tax ({{cartSummary.tax}} %)</h5>
+								</td>
+								<td class="text-right">
+									<h5><strong>{{cartSummary.taxAmount | number: 2}}</strong></h5>
+								</td>
+							</tr>
+							<tr>
+								<td>   </td>
+								<td>   </td>
+								<td>   </td>
+								<td>
+									<h3>Total</h3>
+								</td>
+								<td class="text-right">
+									<h3><strong>{{cartSummary.grandTotal | number: 2}}</strong></h3>
+								</td>
+							</tr>
+							<tr>
+								<td>   </td>
+								<td>   </td>
+								<td>   </td>
+								<td>
+									<button type="button" class="btn btn-default" ng-click="continueShopping()">
+										<span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+									</button>
+								</td>
+								
+								<td>
+									<button type="button" class="btn btn-success" ng-click="createOrder(cartSummary)">
+										Place Order <span class="glyphicon glyphicon-play"></span>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				<div ng-if="!cartSummary">
+					<span style="color:red">Your shopping cart is empty</span>&nbsp;
+					<button type="button" class="btn btn-default" ng-click="continueShopping()">
+						<span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+					</button>
+				</div>
+		</div>
+	</div>
+</div>

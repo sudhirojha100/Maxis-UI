@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>User dashboard</title>
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script src="../userScript.js"></script>
+		<script src="../controllers/userController.js"></script>
+		<script src="../controllers/productController.js"></script>
+		<script src="../controllers/cartController.js"></script>
+		<script src="../controllers/myOrderController.js"></script>
+		<link rel="stylesheet" href="../styles/loader.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	</head>
+	<body ng-app="maxisApp">
+		<div ng-controller="userScriptController"><div>
+			<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="#/products">Products
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li><a href="#/myOrder">My Orders</a></li>
+					<li>
+						<a href="#/myCart" ng-if="counter > 0">My Cart({{counter}})</a>
+						<a href="#/myCart" ng-if="!counter">My Cart</a>
+					</li>
+					<li style="cursor: pointer"><a ng-click="logout()">Logout</a></li>
+				</ul>
+			</nav>
+		</div>
+		<br/>
+		<div ng-view></div>
+		</div>
+	</body>
+</html>
