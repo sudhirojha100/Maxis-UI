@@ -18,6 +18,7 @@ maxisApp.controller('registerController',function($scope, $window, $http, $timeo
 				var result = response.data;
 				if( result.isSuccess ){
 					$scope.isSuccess = true;
+					$scope.register = "";
 					$scope.successMessage = result.data;
 					$scope.hideErrorMessage();
 				}else{

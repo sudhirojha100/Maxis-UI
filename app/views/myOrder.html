@@ -33,7 +33,7 @@
 										<a ng-if="!(order.status === 'CANCELED' || order.status ==='REJECTED')" ng-click="cancelOrder(order.orderId)">
 											<span style="color:red;" class="glyphicon glyphicon-remove" title="Cancel Order"></span>
 										</a>
-										<a>
+										<a ng-click="viewOrder(order.orderId)">
 										  <span class="glyphicon glyphicon-eye-open" title="View"></span>
 										</a>
 									</td>

@@ -17,13 +17,13 @@
 			  bottom: 0;
 			  left: 0;
 			  width: 320px;
-			  height: 500px;
+			  height: 700px;
 			}
 			.align-center {
 				text-align:center;
 			}
 		</style>
-		<title>Maxis New Registration</title>
+		<title>New Registration</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.23/angular-ui-router.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -65,6 +65,24 @@
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="contactNumber" ng-model="register.contactNumber" placeholder="Contact Number" required>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="address1" ng-model="register.address.address1" placeholder="Address 1" required>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="address2" ng-model="register.address.address2" placeholder="Address 2">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="city" ng-model="register.address.city" placeholder="City" required>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="state" ng-model="register.address.state" placeholder="State" required>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="zipCode" ng-model="register.address.zipCode" placeholder="Zip code" required>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="landMark" ng-model="register.address.landMark" placeholder="Nearest Landmark">
 						</div>
 						<br/>
 						<div class="align-center">

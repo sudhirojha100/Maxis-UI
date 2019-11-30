@@ -1,6 +1,6 @@
 maxisApp.controller('adminController',function($scope, $http, $window, $location){
 	
-	var userId = $window.localStorage.getItem("ADMIN_USER_ID");
+	var userId = $window.localStorage.getItem("USER_ID");
 		
 	$scope.users = [];
 		

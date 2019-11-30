@@ -1,0 +1,192 @@
+<html>
+	<head>
+		<title></title>
+		<style>
+			body{margin-top:20px;
+				background:#eee;
+			}	
+			.invoice {
+				padding: 30px;
+			}
+			.invoice h2 {
+				margin-top: 0px;
+				line-height: 0.8em;
+			}
+			.invoice .small {
+				font-weight: 300;
+			}
+			.invoice hr {
+				margin-top: 10px;
+				border-color: #ddd;
+			}
+			.invoice .table tr.line {
+				border-bottom: 1px solid #ccc;
+			}
+			.invoice .table td {
+				border: none;
+			}
+			.invoice .identity {
+				margin-top: 10px;
+				font-size: 1.1em;
+				font-weight: 300;
+			}
+			.invoice .identity strong {
+				font-weight: 600;
+			}
+			.grid {
+				position: relative;
+				width: 100%;
+				background: #fff;
+				color: #666666;
+				border-radius: 2px;
+				margin-bottom: 25px;
+				box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+			}
+		</style>
+		<link rel="stylesheet" href="../styles/loader.css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.23/angular-ui-router.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<script src="../../app.js"></script>
+		<script src="../controllers/orderDetailController.js""></script>
+	</head>
+	<body ng-app="maxisApp" ng-controller="orderDetailController">
+		<div style="padding-left:130px;padding-right:200px;">
+			<div class="se-pre-con" ng-if="loader"></div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">Order Details</div>
+						<div class="panel-body">
+							<div ng-if="!orderDetails.order">
+								No contents
+							</div>
+							<div class="container" ng-if="orderDetails.order">
+							   <div class="row">
+								  <!-- BEGIN ORDER DETAILS -->
+								  <div class="col-xs-10">
+									 <div class="grid invoice">
+										<div class="grid-body">
+										   <div class="invoice-title">
+											<div class="invoice-title">
+												<div class="row">
+													<div class="col-xs-12">
+														<h2>
+														<span class="small">Order Id : {{orderDetails.order.orderId}}</span>
+														</h2>
+													</div>
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-xs-6">
+													<address>
+														<strong>Customer Details:</strong><br>
+														{{orderDetails.user.fullName}}<br>
+														{{orderDetails.user.email}}<br>
+														<abbr title="Mobile">Mobile no.:</abbr> {{orderDetails.user.contactNumber}}
+													</address>
+												</div>
+												<div class="col-xs-6 text-right">
+													<address>
+														<strong>Customer Address:</strong><br>
+														{{orderDetails.user.addressList[0].address1}}<br>
+														{{orderDetails.user.addressList[0].address2}},<br>
+														{{orderDetails.user.addressList[0].city}}, {{orderDetails.user.addressList[0].state}}<br>
+														{{orderDetails.user.addressList[0].country}} - {{orderDetails.user.addressList[0].zipCode}}
+													</address>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-6">
+													<address>
+														<strong>Order Status:</strong><br>
+														{{orderDetails.order.statusDescription}}<br>
+													</address>
+												</div>
+												<div class="col-xs-6 text-right">
+													<address>
+														<strong>Order Date:</strong><br>
+														{{orderDetails.order.creationDate | date:'dd:MM:yyyy HH:mm:ss a'}}
+													</address>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<h3>ORDER SUMMARY</h3>
+													<table class="table table-striped">
+														<thead>
+															<tr class="line">
+																<td><strong>#</strong></td>
+																<td class="text-center"><strong>ITEM</strong></td>
+																<td class="text-center"><strong>QUANTITY</strong></td>
+																<td class="text-right"><strong>PRICE</strong></td>
+																<td class="text-right"><strong>SUBTOTAL</strong></td>
+															</tr>
+														</thead>
+														<tbody>
+															<tr ng-repeat="item in orderDetails.order.orderItems" class="line">
+																<td>{{$index+1}}</td>
+																<td class="text-center">
+																	<strong>{{item.productName}}</strong><br>
+																	{{item.description}}
+																</td>
+																<td class="text-center">{{item.quantity}}</td>
+																<td class="text-center">{{item.price | number : 2}}</td>
+																<td class="text-right">{{item.price * item.quantity | number : 2}}</td>
+															</tr>
+															<tr>
+																<td colspan="3"></td>
+																<td class="text-right"><strong>Total</strong></td>
+																<td class="text-right"><strong>{{orderDetails.order.subTotal | number : 2}}</strong></td>
+															</tr>
+															<tr>
+																<td colspan="3"></td>
+																<td class="text-right"><strong>Tax({{orderDetails.order.taxPercentage}}%)</strong></td>
+																<td class="text-right"><strong>{{orderDetails.order.taxAmount | number : 2}}</strong></td>
+															</tr>
+															<tr>
+																<td colspan="3"></td>
+																<td class="text-right"><strong>Shipping Charges</strong></td>
+																<td class="text-right"><strong>{{orderDetails.order.shippingChares | number : 2}}</strong></td>
+															</tr>
+															<tr>
+																<td colspan="3"></td>
+																<td class="text-right"><strong>Grand Total</strong></td>
+																<td class="text-right"><strong>{{orderDetails.order.grandTotal | number : 2}}</strong></td>
+															</tr>
+															
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12 text-right identity">
+													<button type="button" class="btn btn-default" ng-click="back()">
+														Back
+													</button>
+													<button type="button" class="btn btn-default" ng-click="continueShopping()" ng-if="userId == orderDetails.order.userId">
+														<span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+													</button>
+													<button type="button" class="btn btn-danger" ng-if="(orderDetails.order.status != 'CANCELED') && userId == orderDetails.order.userId" ng-click="cancelOrder(orderDetails.order.orderId)">
+														Cancel Order
+													</button>
+													<button type="button" class="btn btn-danger" ng-click="rejectOrder(orderDetails.order.orderId)" ng-if="orderDetails.order.status != 'REJECTED' && userId != orderDetails.order.userId">
+														Reject Order
+													</button>
+												</div>
+											</div>
+										</div>
+									 </div>
+								  </div>
+								  <!-- END ORDER DETAILS -->
+							   </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+	

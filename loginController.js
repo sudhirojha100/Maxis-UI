@@ -16,11 +16,10 @@ maxisApp.controller('loginController',function($scope, $window, $http, $timeout)
 			if( response && response.data && response.data.isSuccess){
 				var result = response.data.data;
 				if( result.isSuccess ){
+					$window.localStorage.setItem("USER_ID", result.userId);
 					if( result.role === 'ROLE_ADMIN' || result.role === 'ROLE_SUPER_ADMIN' ){
-						$window.localStorage.setItem("ADMIN_USER_ID", result.userId);
 						$window.location.href = 'app/views/dashboard.html';
 					}else{
-						$window.localStorage.setItem("USER_ID", result.userId);
 						$window.location.href = 'app/views/userDashboard.html';
 					}
 				}else{

@@ -37,6 +37,11 @@ maxisApp.controller('myOrderController',function($scope, $http, $window, $locati
 		});
 	}
 	
+	$scope.viewOrder = function(orderId){
+		$window.localStorage.setItem("ORDER_ID", orderId);
+		$window.location.href = $location.protocol() + '://'+ $location.host() +':'+  $location.port() + "/app/views/orderDetails.html";
+	}
+	
 	$scope.checkLogout();
 	$scope.getMyOrders();
 	

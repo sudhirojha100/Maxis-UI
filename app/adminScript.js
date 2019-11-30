@@ -17,7 +17,7 @@ maxisApp.config(function($routeProvider){
 maxisApp.controller('adminScriptController',function($scope, $window, $location){
 	
 	$scope.logout = function(){
-		$window.localStorage.setItem("ADMIN_USER_ID", '');
+		$window.localStorage.setItem("USER_ID", '');
 		$window.location.href = $location.protocol() + '://'+ $location.host() +':'+  $location.port() + "/login";
 	}
 });

@@ -30,10 +30,10 @@
 									<td>{{order.grandTotal | number: 2}}</td>
 									<td>{{order.orderItems.length}} items</td>
 									<td>
-										<a href="#">
+										<a ng-click="rejectOrder(order.orderId)" ng-if="!(order.status ==='CANCELED'|| order.status ==='REJECTED')">
 											<span style="color:red;" class="glyphicon glyphicon-remove" title="Reject Order"></span>
 										</a>
-										<a href="#">
+										<a ng-click="viewOrder(order.orderId)">
 										  <span class="glyphicon glyphicon-eye-open" title="View"></span>
 										</a>
 									</td>
