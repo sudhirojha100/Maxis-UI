@@ -17,18 +17,24 @@
 							   <th>Quantity</th>
 							   <th class="text-center">Price</th>
 							   <th class="text-center">Total</th>
-							   <th> </th>
+							   <th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="item in cartSummary.cartItems">
 								<td class="col-sm-8 col-md-6">
 									<div class="media">
-										<a class="thumbnail pull-left"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
-										<div class="media-body" style="text-align: center">
-											<h4 class="media-heading"><a>{{item.productName}}</a></h4>
-											<h5 class="media-heading"> by <a>{{item.brand}}</a></h5>
-											<h5 class="media-heading">{{item.description}}</h5>
+										<a class="thumbnail pull-left"> 
+											<img class="media-object" src="{{item.imageUrl}}" style="width: 150px; height: 200px;">
+										</a>
+										<div style="text-align: center;">
+											<h4 class="media-heading">{{item.productName}}</h4>
+											<h5 class="media-heading"><b>The {{item.productType}}</b></h5><br/>
+											<h5 class="media-heading" ng-repeat="character in  item.productCharacteristics">
+												{{character.characteristic}}
+											</h5>
+											<br>
+											<h5 class="media-heading"><b>RM {{item.price | number : 2}}/month</b></h5>
 										</div>
 									</div>
 								</td>

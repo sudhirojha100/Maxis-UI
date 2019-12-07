@@ -5,11 +5,27 @@ maxisApp.controller('productController',function($scope, $window, $http, $timeou
 	$scope.product = {};
 	$scope.products = [];
 	
+	var userId = $window.localStorage.getItem("USER_ID");
+		
+		
+	$scope.checkLogout = function(){
+		if( userId.length == 0 ){
+			$window.location.href = $location.protocol() + '://'+ $location.host() +':'+  $location.port() + "/login";
+		}
+	}
+	
 	var BASE_URL = 'http://127.0.0.1:9101/gateway/inventory/';
 	
 	$scope.createProduct = function(){
 		$scope.loader = true;
 		var data = $scope.product;
+		if( data.productType === 'Home Fiber' ){
+			data.imageUrl = '../images/fiber_nation.jpg';
+		}
+		else{
+			data.imageUrl = '../images/mobile_plan.jpg';
+		}
+		data.createdByUserId = userId;
 		$http({
 			'url': BASE_URL + 'product',
 			'method': 'POST',
@@ -20,16 +36,17 @@ maxisApp.controller('productController',function($scope, $window, $http, $timeou
 				var result = response.data;
 				if( result.isSuccess ){
 					$scope.loader = false;
+					$scope.product = {};
 					$scope.isSuccess = true;
 					$scope.successMessage = result.data;
 					$scope.hideErrorMessage();
+					$scope.getProducts();
 				}else{
 					$scope.loader = false;
 					if( result.data ){
 						$scope.hasListError = true;
 						$scope.errors = result.data;
 						$scope.hideErrorMessage();
-						$scope.getProducts();
 					}else{
 						$scope.hasError = true;
 						$scope.errorMessage = result.errorMessage;
@@ -52,6 +69,7 @@ maxisApp.controller('productController',function($scope, $window, $http, $timeou
 				var result = response.data;
 				if( result.isSuccess ){
 					$scope.loader = false;
+					$scope.getProducts();
 				}else{
 					$scope.loader = false;
 				}
@@ -75,6 +93,7 @@ maxisApp.controller('productController',function($scope, $window, $http, $timeou
 	
 	
 	$scope.getProducts();
+	$scope.checkLogout();
 	
 	$scope.hideErrorMessage = function(){
 		$timeout(function(){
